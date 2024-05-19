@@ -1,0 +1,177 @@
+/* -------------------------------------------- COLORS -------------------------------------------- */
+:root {
+    --text: #0c181d;
+    --background: #f4f8fb;
+    --background-darker: #dfe4e7;
+    --primary: #26a6d9;
+    --secondary: #7bd2f4;
+    --accent: #48cbfe;
+}
+
+/* -------------------------------------------- MAIN -------------------------------------------- */
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+* {font-family: "Inter", sans-serif;}
+
+.shadow {
+    box-shadow: 7px 5px 8px var(--background-darker);
+}
+
+
+/* -------------------------------------------- HEADER -------------------------------------------- */
+
+header {
+    width: 98%;
+    height: 44px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0% 1%;
+
+    border-bottom: 1px solid var(--background-darker);
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 20%;
+}
+
+.buttons > * {transition-duration: 0.2s;}
+
+.buttons > *:hover {
+    cursor: pointer;
+    color: var(--accent);
+
+    transition-duration: 0.2s;
+    transform: scale(1.05);
+}
+
+.icon-buttons {
+    display: none;
+}
+
+/* -------------------------------------------- SEARCH BAR -------------------------------------------- */
+
+#searchbar {
+    width: 100%;
+    height: 10svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#place {
+    width: 40%;
+    height: 6svh;
+
+    background-color: var(--background-darker);
+    border: 0px solid transparent;
+    border-radius: 25px;
+
+    padding: 0 12px;
+    font-size: large;
+}
+
+/* -------------------------------------------- BEFORE DATA -------------------------------------------- */
+
+.nodata {
+    font-size: x-large;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 5svh 18svw;
+}
+
+.nodata > * > b {
+    color: var(--accent);
+}
+
+
+/* -------------------------------------------- DAYS AND THEIR DESIGNS -------------------------------------------- */
+
+.allDays {
+    width: 100%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.day {
+    cursor: pointer;
+
+    width: 40svw;
+    height: auto;
+
+    padding: 10px;
+    margin: 10px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    border: 1px solid var(--background-darker);
+    border-radius: 45px;
+
+    transition-duration: 0.25s;
+}
+
+.day:hover {
+    border: 3px solid var(--accent);
+
+    transform: scale(1.1) translateY(-6px);
+    transition-duration: 0.25s;
+}
+
+
+/* -------------------------- TOP -------------------------- */
+
+.top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.aveTemp {
+    width: 35%;
+    text-align: right;
+    font-weight: bolder;
+    font-size: 8vmin;
+    padding: 5%;
+}
+
+.smallinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+.smallinfo > * {
+    margin: 2%;
+}
+
+.smallinfo > p > b {
+    color: var(--accent);
+}

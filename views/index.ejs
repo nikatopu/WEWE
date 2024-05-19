@@ -1,0 +1,81 @@
+<%- include("header.ejs") %>
+    <form action="/weather" method="get" id="searchbar">
+        <input id="place" name="place" type="text" id="searchbar">
+    </form>
+
+    <!-- Check if the variable days exist -->
+    <!-- If they do, then display the data -->
+    <% if (locals.days) { %>
+
+        <div class="allDays">
+
+        
+        <!-- This code runs through every single day -->
+            <% for (var i = 0; i <= days.length - 1; i++) {%> 
+                
+                <!-- Just another day -->
+                <div class="day shadow">
+                    <!-- Helper variables, like averages -->
+                    <% let aveTemp = 0.0; days[i].forEach(n => {aveTemp += n.main.temp}); aveTemp = Math.round(aveTemp / (days[i].length))%>
+
+                    <!-- The top most information, shown always -->
+                    <div class="top">
+
+                        <!-- The icon -->
+                        <div class="icon">
+                            <img src="<%- `https://openweathermap.org/img/wn/${days[i][0].weather[0].icon}@2x.png` %>" alt="<%- days[i][0].weather[0].description %>">
+                        </div>
+
+                        <!-- Small info - Day, date, weather condition -->
+                        <div class="smallinfo">
+                            <!-- Helper variables for date display -->
+                                <% const theDate = new Date(days[i][0].dt_txt) %>
+
+                                <% const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %>
+                                <% let thisDay = "" %>
+                                <% if (i===0) {thisDay = "Today"} else if (i===1) {thisDay = "Tomorrow"} else {thisDay = dayNames[theDate.getDay()]} %>
+
+                                <% const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"] %>
+                                <% const thisMonth = monthNames[theDate.getMonth()]%>
+                            
+                            <!-- The actual info -->
+                            <h2><%- thisDay %></h2>
+                            <p><b><%- days[i][0].dt_txt.split("-")[2].split(" ")[0] %> <%- thisMonth %></b></p>
+                            <p><b><%- days[i][0].weather[0].main %></b></p>
+                        </div>
+
+
+                        <!-- The average temparature -->
+                        <div class="aveTemp">
+                            <%- aveTemp %> °C
+                        </div>
+
+                    </div>
+
+                    <!-- Bottom layer, hidden until hovered -->
+                    <div class="bottom">
+                        
+                        <img src="" alt=""/>
+
+                    </div>
+
+                    
+
+                </div>
+
+            <% } %>
+
+
+        </div>
+
+
+    <% } else { %>    <!-- If the variable days doesn't exist, then display the input text -->
+
+        <div class="nodata">
+            <h1>Welcome to WEWE, or the <b>Weather Website</b></h1>
+            <h1>Either <b>enable your location</b> or put in the desired place to get the weater</h1>
+        </div>
+
+    <% } %>
+</body>
+</html>
