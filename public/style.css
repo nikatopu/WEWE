@@ -235,3 +235,75 @@ header {
 
     width: 30%;
 }
+
+
+
+
+
+
+
+/* -------------------------------------------- RESPONDIVNESS -------------------------------------------- */
+
+/* -------------------------- Small screen sizes -------------------------- */
+
+@media screen and (max-width:64em) {
+    body {
+        overflow-x: hidden;
+    }
+
+    #place {
+        width: 90%;
+    }
+
+    .text-buttons {
+        display: none;
+    }
+
+    .icon-buttons {
+        display: flex;
+    }
+
+    .day {
+        width: 95svw;
+        height: 10svh;
+    }
+
+    .day:hover {
+        height: 20svh;
+
+        transform: scale(1);
+    }
+
+    .icon > img {
+        height: 9svh;
+        width: auto;
+    }
+
+    .top {
+        height: 9svh;
+    }
+
+    .smallinfo {
+        font-size: 3svh;
+
+        line-height: 2.5svh;
+    }
+
+    .smallinfo > p > b {
+        font-size: 2svh;
+    }
+
+    .bottom > * {
+        transform: scale(0.8);
+        font-size: 3svw;
+    }
+
+    .bottom {
+        justify-content: space-between;
+    }
+
+    .column {
+        font-size: 1.5svh;
+        width: 50%;
+    }
+}
