@@ -15,8 +15,6 @@ function weather_url(lat, lon, token) {
 }
 
 
-
-
 app.get("/", (req, res) => {
     res.render("index.ejs");
 })
@@ -30,6 +28,9 @@ app.get("/weather", async (req, res) => {
         const wea_url = weather_url(geo.data[0].lat, geo.data[0].lon, token);
         const weather = await axios.get(wea_url);
 
+        // Get the current city
+        const city = weather.data.city.name + "," + weather.data.city.country;
+
         // Group the array by days
         const weather_list = weather.data.list;
         const groupByDate = weather_list.reduce((group, date) => {
@@ -41,11 +42,13 @@ app.get("/weather", async (req, res) => {
           }, {}); // This will return an object of different days as keys and the data as values
         const days = Object.keys(groupByDate).flatMap((key) => [groupByDate[key]]); // This will return an array of different days and their datas
         // Now we can work with this days, instead of weather.data
+        console.log(days);
 
-        res.render("index.ejs", {days: days});
+
+        res.render("index.ejs", {days: days, city: city});
     } catch (err) {
         // console.log(JSON.stringify(err));
-        res.render("index.ejs", {weather: JSON.stringify(err)});
+        res.render("index.ejs", {error: JSON.stringify(err)});
     }
         
 })

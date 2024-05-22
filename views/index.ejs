@@ -1,6 +1,11 @@
 <%- include("header.ejs") %>
+    <script src="./location.js"></script>
+    <!-- Check if the variable city exists -->
+    <!-- If they do, then replace the placeholder in the search bar -->
+    <% let placeHolder = (locals.city) ? city : "search..." %>
+
     <form action="/weather" method="get" id="searchbar">
-        <input id="place" name="place" type="text" id="searchbar">
+        <input id="place" name="place" type="text" id="searchbar" placeholder=<%- placeHolder %>>
     </form>
 
     <!-- Check if the variable days exist -->
@@ -16,14 +21,27 @@
                 <!-- Just another day -->
                 <div class="day shadow">
                     <!-- Helper variables, like averages -->
-                    <% let aveTemp = 0.0; days[i].forEach(n => {aveTemp += n.main.temp}); aveTemp = Math.round(aveTemp / (days[i].length))%>
+                    <!-- Temperatures -->
+                        <% let temperatureArray = days[i].map(a => a.main.temp); %>
+                        <% let aveTemp = Math.round((temperatureArray.reduce((a, b) => a + b) / (temperatureArray.length))) %>
+                        <% let highTemp = Math.round(Math.max(...temperatureArray) * 10)/10;%>
+                        <% let lowTemp = Math.round(Math.min(...temperatureArray)*10)/10 %>
+
+                    <!-- Precipitation -->
+                        <% let precArr = days[i].map(a => a.pop); %>
+                        <% let avePrec = Math.round((precArr.reduce((a, b) => a+b) / (precArr.length)) * 100) / 100 %>
+
+                    <!-- Wind -->
+                        <% let windArr = days[i].map(a => a.wind); %>
+                        <% let windVelocities = windArr.map(a => a.speed); %>
+                        <% let aveWindVelocity = Math.round((windVelocities.reduce((a, b) => a+b)) / (windVelocities.length))  %>
 
                     <!-- The top most information, shown always -->
                     <div class="top">
 
                         <!-- The icon -->
                         <div class="icon">
-                            <img src="<%- `https://openweathermap.org/img/wn/${days[i][0].weather[0].icon}@2x.png` %>" alt="<%- days[i][0].weather[0].description %>">
+                            <img src="<%- `./icons/${(days[i][0].weather[0].icon).slice(0, -1)}d.png` %>" alt="<%- days[i][0].weather[0].description %>">
                         </div>
 
                         <!-- Small info - Day, date, weather condition -->
@@ -55,7 +73,33 @@
                     <!-- Bottom layer, hidden until hovered -->
                     <div class="bottom">
                         
-                        <img src="" alt=""/>
+                        <div class="row">
+                            <div class="icon">
+                                <img src="./icons/perc.png" alt="precipitation icon" />
+                            </div>
+                            <h1>
+                                <%- avePrec %>%
+                            </h1>
+                        </div>
+
+                        <div class="row">
+                            <div class="icon">
+                                <img src="./icons/wnd.png" alt="wind icon"/>
+                            </div>
+                            <h1>
+                                <%- aveWindVelocity %> m/s
+                            </h1>
+                        </div>
+
+                        <div class="column bluebold">
+                            <h1>
+                                H: <b><%- highTemp %></b>
+                            </h1>
+                            <h1>
+                                L: <b><%- lowTemp %></b>
+                            </h1>
+                        </div>
+                        
 
                     </div>
 
@@ -68,14 +112,22 @@
 
         </div>
 
+    <%} else if (locals.error) { %> <!-- If the variable days doesn't exist, then throw the error -->
 
-    <% } else { %>    <!-- If the variable days doesn't exist, then display the input text -->
+        <div class="nodata">
+            <h1>There was <b>an error</b> getting your data</h1>
+            <h1><b>Please,</b> try again</h1>
+        </div>
+
+    <% } else { %>    <!-- Otherwise display the input text -->
 
         <div class="nodata">
             <h1>Welcome to WEWE, or the <b>Weather Website</b></h1>
-            <h1>Either <b>enable your location</b> or put in the desired place to get the weater</h1>
+            <h1>Search for the <b>desired place</b>, to get the weather</h1>
         </div>
 
     <% } %>
+
+
 </body>
 </html>
