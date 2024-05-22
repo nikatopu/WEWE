@@ -259,8 +259,18 @@ header {
         display: none;
     }
 
+    header {
+        width: 90svw;
+        padding: 0% 5%;
+    }
+
     .icon-buttons {
         display: flex;
+    }
+
+    .icon-buttons > img {
+        height: 42px;
+        cursor: pointer;
     }
 
     .day {
