@@ -16,7 +16,7 @@ function weather_url(lat, lon, token) {
 
 
 app.get("/", (req, res) => {
-    res.render("index.ejs");
+    res.render("index.ejs", {runScript: "./location.js"});
 })
 
 app.get("/weather", async (req, res) => {
@@ -44,7 +44,7 @@ app.get("/weather", async (req, res) => {
         // Now we can work with this days, instead of weather.data
         console.log(days);
 
-
+        
         res.render("index.ejs", {days: days, city: city});
     } catch (err) {
         // console.log(JSON.stringify(err));

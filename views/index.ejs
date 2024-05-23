@@ -1,5 +1,4 @@
 <%- include("header.ejs") %>
-    <script src="./location.js"></script>
     <!-- Check if the variable city exists -->
     <!-- If they do, then replace the placeholder in the search bar -->
     <% let placeHolder = (locals.city) ? city : "search..." %>
@@ -123,11 +122,13 @@
 
         <div class="nodata">
             <h1>Welcome to WEWE, or the <b>Weather Website</b></h1>
-            <h1>Search for the <b>desired place</b>, to get the weather</h1>
+            <h1>Either <b>enable your location</b> or put in the desired place to get the weather.</h1>
         </div>
 
     <% } %>
-
-
+    
+    <% if (locals.runScript) { %>
+        <script src="<%- runScript %>"></script>
+    <% } %>
 </body>
 </html>
