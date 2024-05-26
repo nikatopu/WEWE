@@ -6,7 +6,6 @@
     <form action="/weather" method="get" id="searchbar">
         <input id="place" name="place" type="text" id="searchbar" placeholder=<%- placeHolder %>>
     </form>
-
     <!-- Check if the variable days exist -->
     <!-- If they do, then display the data -->
     <% if (locals.days) { %>
@@ -18,7 +17,7 @@
             <% for (var i = 0; i <= days.length - 1; i++) {%> 
                 
                 <!-- Just another day -->
-                <div class="day shadow">
+                <div class="day shadow" onclick="this.classList.toggle('expanded')">
                     <!-- Helper variables, like averages -->
                     <!-- Temperatures -->
                         <% let temperatureArray = days[i].map(a => a.main.temp); %>
@@ -66,6 +65,11 @@
                         <div class="aveTemp">
                             <%- Math.round(highTemp) %> °C
                         </div>
+
+                        <!-- This is the close button for when expanded -->
+                        <!-- <div class="hide">
+                            <b>X</b>
+                        </div> -->
 
                     </div>
 

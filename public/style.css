@@ -28,7 +28,7 @@ body {
 /* -------------------------------------------- HEADER -------------------------------------------- */
 
 header {
-    width: 98lvw;
+    width: 89lvw;
     height: 44px;
 
     display: flex;
@@ -36,7 +36,7 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    padding: 0% 1%;
+    padding: 0% 5.5%;
 
     border-bottom: 1px solid var(--background-darker);
 }
@@ -44,10 +44,10 @@ header {
 .buttons {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 
-    width: 20%;
+    width: 12.5%;
 }
 
 .buttons > * {transition-duration: 0.2s;}
@@ -134,8 +134,8 @@ header {
     width: 40lvw;
     height: 8lvw;
 
-    padding: 10px;
-    margin: 10px;
+    padding: 0.615vw;
+    margin: 0.615vw;
 
 
     display: flex;
@@ -143,13 +143,15 @@ header {
     justify-content: top;
     overflow-y: hidden;
     
+    background-color: var(--background);
+
     border: 1px solid var(--background-darker);
     border-radius: 45px;
 
     transition-duration: 0.4s;
 }
 
-.day:hover {
+.day:hover:not(.expanded) {
     border: 3px solid var(--accent);
     height: 16lvw;
 
@@ -158,6 +160,23 @@ header {
     transition-duration: 0.4s;
 }
 
+/* -------------------------- Day - Expanded -------------------------- */
+
+.expanded {
+    position: fixed;
+    /* top: 2.5svh; */
+
+    width: 89lvw;
+    height: 80svh;
+}
+
+/* .hide:not(.expanded > .hide) {
+    display: none;
+}
+
+.expanded > .hide {
+    display: block;
+} */
 
 /* -------------------------- TOP -------------------------- */
 
@@ -246,7 +265,7 @@ header {
 
 /* -------------------------- Small screen sizes -------------------------- */
 
-@media screen and (max-width:64em) {
+@media screen and (max-width: 64em) {
     body {
         overflow-x: hidden;
     }
