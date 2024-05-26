@@ -36,9 +36,11 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    padding: 0% 5.5%;
+    padding: 0lvw 5.5lvw;
 
     border-bottom: 1px solid var(--background-darker);
+
+    font-size: 1lvw;
 }
 
 .buttons {
@@ -47,7 +49,7 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    width: 12.5%;
+    width: 13lvw;
 }
 
 .buttons > * {transition-duration: 0.2s;}
@@ -68,7 +70,7 @@ header {
 
 #searchbar {
     width: 100lvw;
-    height: 10svh;
+    height: 10lvh;
 
     display: flex;
     justify-content: center;
@@ -77,7 +79,7 @@ header {
 
 #place {
     width: 40%;
-    height: 6svh;
+    height: 6lvh;
 
     background-color: var(--background-darker);
     border: 0px solid transparent;
@@ -98,7 +100,7 @@ header {
     align-items: center;
     justify-content: center;
 
-    margin: 5svh 18lvw;
+    margin: 5lvh 18lvw;
 }
 
 .nodata > * > b {
@@ -121,7 +123,7 @@ header {
 /* -------------------------------------------- DAYS AND THEIR DESIGNS -------------------------------------------- */
 
 .allDays {
-    width: 100%;
+    width: 100lvw;
     
     display: flex;
     flex-wrap: wrap;
@@ -134,8 +136,8 @@ header {
     width: 40lvw;
     height: 8lvw;
 
-    padding: 0.615vw;
-    margin: 0.615vw;
+    padding: 0.615lvw;
+    margin: 0.615lvw;
 
 
     display: flex;
@@ -164,10 +166,10 @@ header {
 
 .expanded {
     position: fixed;
-    /* top: 2.5svh; */
+    /* top: 2.5lvh; */
 
     width: 89lvw;
-    height: 80svh;
+    height: 80lvh;
 }
 
 /* .hide:not(.expanded > .hide) {
@@ -294,32 +296,32 @@ header {
 
     .day {
         width: 95svw;
-        height: 10svh;
+        height: 10lvh;
     }
 
     .day:hover {
-        height: 20svh;
+        height: 20lvh;
 
         transform: scale(1);
     }
 
     .icon > img {
-        height: 9svh;
+        height: 9lvh;
         width: auto;
     }
 
     .top {
-        height: 9svh;
+        height: 9lvh;
     }
 
     .smallinfo {
-        font-size: 3svh;
+        font-size: 3lvh;
 
-        line-height: 2.5svh;
+        line-height: 2.5lvh;
     }
 
     .smallinfo > p > b {
-        font-size: 2svh;
+        font-size: 2lvh;
     }
 
     .bottom > * {
@@ -332,7 +334,7 @@ header {
     }
 
     .column {
-        font-size: 1.5svh;
+        font-size: 1.5lvh;
         width: 50%;
     }
 }
