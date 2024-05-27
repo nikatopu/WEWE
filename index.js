@@ -9,9 +9,9 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const token = "074eba4301bafa70fd8450f804c2bb40"
-const geo_url = "http://api.openweathermap.org/geo/1.0/direct?q=";
+const geo_url = "https://api.openweathermap.org/geo/1.0/direct?q=";
 function weather_url(lat, lon, token) {
-    return `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${token}&units=metric`;;
+    return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${token}&units=metric`;;
 }
 
 
