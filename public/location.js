@@ -1,7 +1,7 @@
 function openbycoords(lat, lon) {
     const request = new XMLHttpRequest();
 
-    const url = "http://api.openweathermap.org/geo/1.0/reverse?";
+    const url = "https://api.openweathermap.org/geo/1.0/reverse?";
     const key =   "074eba4301bafa70fd8450f804c2bb40";
 
     request.open("GET", `${url}lat=${lat}&lon=${lon}&appid=${key}`, true);
