@@ -153,32 +153,16 @@ header {
     transition-duration: 0.4s;
 }
 
-.day:hover:not(.expanded) {
-    border: 3px solid var(--accent);
-    height: 16lvw;
-
-    /* flex-grow: 1.01; */
-    transform: scale(1.1) translateY(-6px);
-    transition-duration: 0.4s;
+@media screen and (min-width: 64em) {
+    .day:hover:not(.expanded) {
+        border: 3px solid var(--accent);
+        height: 16lvw;
+    
+        /* flex-grow: 1.01; */
+        transform: scale(1.1) translateY(-6px);
+        transition-duration: 0.4s;
+    }
 }
-
-/* -------------------------- Day - Expanded -------------------------- */
-
-.expanded {
-    position: fixed;
-    /* top: 2.5lvh; */
-
-    width: 89lvw;
-    height: 80lvh;
-}
-
-/* .hide:not(.expanded > .hide) {
-    display: none;
-}
-
-.expanded > .hide {
-    display: block;
-} */
 
 /* -------------------------- TOP -------------------------- */
 
@@ -261,6 +245,137 @@ header {
 
 
 
+/* -------------------------- Day - Expanded -------------------------- */
+
+.expanded {
+    position: fixed;
+    /* top: 2.5lvh; */
+
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 89lvw;
+    height: 78lvh;
+}
+
+.hidden:not(.expanded) {
+    display: none;
+}
+
+.expanded > .daily {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 35lvh;
+}
+
+/* TOP */
+.expanded > .daily > .top {
+    width: 50%;
+    justify-content: space-evenly;
+}
+
+.expanded > .daily > .top > .icon {
+    width: 16lvw;
+}
+.expanded > .daily > .top > .icon > img {
+    width: 15lvw;    
+}
+
+.expanded > .daily > .top > .smallinfo,
+.expanded > .daily > .top > .smallinfo > * > * {
+    font-size: 2.5lvw;
+}
+
+.expanded > .daily > .top > .smallinfo > p {
+    margin-top: 1.5lvw;
+}
+
+.expanded > .daily > .top > .aveTemp {
+    padding: 0;
+}
+
+/* Bottom */
+.expanded > .daily > .bottom {
+    width: 40%;
+    flex-direction: row-reverse;
+}
+
+/* The Hourly */
+.day:not(.expanded) > .hourly {
+    display: none;
+}
+
+.hourly {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* overflow-x: scroll; */
+}
+
+.hour {
+    width: 10lvw;
+
+    border: 1px solid var(--background-darker);
+    border-radius: 1lvw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    margin: 0.1lvw;
+}
+
+.hour > img {
+    width: 9lvw;
+    height: auto;
+}
+
+.hourtemp > p {
+    color: var(--accent);
+    font-size: 1.5lvw;
+}
+
+.hourtemp > h1 {
+    font-size: 3lvw;
+    margin: 0;
+}
+
+
+/* -------------------------- Expanded day - close button -------------------------- */
+
+.day:not(.expanded) > .daily > .top > .closebutton {
+    display: none;
+}
+
+.expanded > .daily > .top > .closebutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 3lvw;
+    height: 3lvw;
+
+    position: absolute;
+    right: 1lvw;
+    top: 1lvw;
+
+    text-align: center;
+    font-size: 2lvw;
+    font-weight: bold;
+
+    z-index: -99;
+}
+
+
 
 
 /* -------------------------------------------- RESPONDIVNESS -------------------------------------------- */
@@ -281,12 +396,12 @@ header {
     }
 
     header {
-        width: 90svw;
-        padding: 0% 5%;
+        font-size: 4lvw;
     }
 
     .icon-buttons {
         display: flex;
+        width: auto;
     }
 
     .icon-buttons > img {
@@ -297,12 +412,6 @@ header {
     .day {
         width: 95svw;
         height: 10lvh;
-    }
-
-    .day:hover {
-        height: 20lvh;
-
-        transform: scale(1);
     }
 
     .icon > img {
@@ -336,5 +445,81 @@ header {
     .column {
         font-size: 1.5lvh;
         width: 50%;
+    }
+
+    .expanded {
+        height: 80lvh;
+        top: 44px;
+    }
+
+    .expanded > .daily {
+        height: 40%;
+        flex-direction: column;
+    }
+    
+    .expanded > .daily > .top {
+        width: 100%;
+    }
+
+    .expanded > .daily > .top > .icon {
+        width: 32lvw;
+    }
+
+    .expanded > .daily > .top > .icon > img {
+        width: 30lvw;
+        height: auto;
+    }
+
+    .expanded > .daily > .top > .smallinfo,
+    .expanded > .daily > .top > .smallinfo > * > * {
+        font-size: 4lvw;
+    }
+
+    .expanded > .daily > .top > .smallinfo > p {
+        margin-top: 2.5lvw;
+    }
+
+    .expanded > .daily > .top > .aveTemp {
+        font-size: 12lvw;
+    }
+
+    .expanded > .daily > .bottom {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .hourly {
+        flex-wrap: wrap;
+        flex-direction: row;
+        height: 60%;
+    }
+
+    .hour {
+        width: 40lvw;
+        margin: 0lvw 2lvw;
+        flex-direction: row;
+
+        border-radius: 5lvw;
+    }
+
+    .hour > img {
+        width: 18lvw;
+        height: auto;
+    }
+
+    .hourtemp {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hourtemp > h1 {
+        font-size: 6lvw;
+    }
+
+    .hourtemp > p {
+        font-size: 5lvw;
+        margin: 0;
     }
 }

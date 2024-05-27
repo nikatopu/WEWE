@@ -16,8 +16,9 @@
         <!-- This code runs through every single day -->
             <% for (var i = 0; i <= days.length - 1; i++) {%> 
                 
+                <script src="./functionality.js"></script>
                 <!-- Just another day -->
-                <div class="day shadow" onclick="this.classList.toggle('expanded')">
+                <div class="day shadow" onclick="this.classList.toggle('expanded'); toggleall();">
                     <!-- Helper variables, like averages -->
                     <!-- Temperatures -->
                         <% let temperatureArray = days[i].map(a => a.main.temp); %>
@@ -35,78 +36,107 @@
                         <% let aveWindVelocity = Math.round((windVelocities.reduce((a, b) => a+b)) / (windVelocities.length))  %>
 
                     <!-- The top most information, shown always -->
-                    <div class="top">
-
-                        <!-- The icon -->
-                        <div class="icon">
-                            <img src="<%- `./icons/${(days[i][0].weather[0].icon).slice(0, -1)}d.png` %>" alt="<%- days[i][0].weather[0].description %>">
+                    <div class="daily">
+                        <div class="top">
+                            <div class="closebutton">
+                                <!-- Only show this when the day class is also extended -->
+                                <!-- This is extended > top > closebutton -->
+                                X
+                            </div>
+    
+                            <!-- The icon -->
+                            <div class="icon">
+                                <img src="<%- `./icons/${(days[i][0].weather[0].icon).slice(0, -1)}d.png` %>" alt="<%- days[i][0].weather[0].description %>">
+                            </div>
+    
+                            <!-- Small info - Day, date, weather condition -->
+                            <div class="smallinfo">
+                                <!-- Helper variables for date display -->
+                                    <% const theDate = new Date(days[i][0].dt_txt) %>
+    
+                                    <% const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %>
+                                    <% let thisDay = "" %>
+                                    <% if (i===0) {thisDay = "Today"} else if (i===1) {thisDay = "Tomorrow"} else {thisDay = dayNames[theDate.getDay()]} %>
+    
+                                    <% const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"] %>
+                                    <% const thisMonth = monthNames[theDate.getMonth()]%>
+                                
+                                <!-- The actual info -->
+                                <h2><%- thisDay %></h2>
+                                <p><b><%- days[i][0].dt_txt.split("-")[2].split(" ")[0] %> <%- thisMonth %></b></p>
+                                <p><b><%- days[i][0].weather[0].main %></b></p>
+                            </div>
+    
+    
+                            <!-- The average temparature -->
+                            <div class="aveTemp">
+                                <%- Math.round(highTemp) %> °C
+                            </div>
+    
+                            <!-- This is the close button for when expanded -->
+                            <!-- <div class="hide">
+                                <b>X</b>
+                            </div> -->
+    
                         </div>
-
-                        <!-- Small info - Day, date, weather condition -->
-                        <div class="smallinfo">
-                            <!-- Helper variables for date display -->
-                                <% const theDate = new Date(days[i][0].dt_txt) %>
-
-                                <% const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %>
-                                <% let thisDay = "" %>
-                                <% if (i===0) {thisDay = "Today"} else if (i===1) {thisDay = "Tomorrow"} else {thisDay = dayNames[theDate.getDay()]} %>
-
-                                <% const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"] %>
-                                <% const thisMonth = monthNames[theDate.getMonth()]%>
+    
+                        <!-- Bottom layer, hidden until hovered -->
+                        <div class="bottom">
                             
-                            <!-- The actual info -->
-                            <h2><%- thisDay %></h2>
-                            <p><b><%- days[i][0].dt_txt.split("-")[2].split(" ")[0] %> <%- thisMonth %></b></p>
-                            <p><b><%- days[i][0].weather[0].main %></b></p>
-                        </div>
-
-
-                        <!-- The average temparature -->
-                        <div class="aveTemp">
-                            <%- Math.round(highTemp) %> °C
-                        </div>
-
-                        <!-- This is the close button for when expanded -->
-                        <!-- <div class="hide">
-                            <b>X</b>
-                        </div> -->
-
-                    </div>
-
-                    <!-- Bottom layer, hidden until hovered -->
-                    <div class="bottom">
-                        
-                        <div class="row">
-                            <div class="icon">
-                                <img src="./icons/perc.png" alt="precipitation icon" />
+                            <div class="row">
+                                <div class="icon">
+                                    <img src="./icons/perc.png" alt="precipitation icon" />
+                                </div>
+                                <h1>
+                                    <%- avePrec %>%
+                                </h1>
                             </div>
-                            <h1>
-                                <%- avePrec %>%
-                            </h1>
-                        </div>
-
-                        <div class="row">
-                            <div class="icon">
-                                <img src="./icons/wnd.png" alt="wind icon"/>
+    
+                            <div class="row">
+                                <div class="icon">
+                                    <img src="./icons/wnd.png" alt="wind icon"/>
+                                </div>
+                                <h1>
+                                    <%- aveWindVelocity %> m/s
+                                </h1>
                             </div>
-                            <h1>
-                                <%- aveWindVelocity %> m/s
-                            </h1>
+    
+                            <div class="column bluebold">
+                                <h1>
+                                    H: <b><%- highTemp %></b>
+                                </h1>
+                                <h1>
+                                    L: <b><%- lowTemp %></b>
+                                </h1>
+                            </div>
+                            
+    
                         </div>
-
-                        <div class="column bluebold">
-                            <h1>
-                                H: <b><%- highTemp %></b>
-                            </h1>
-                            <h1>
-                                L: <b><%- lowTemp %></b>
-                            </h1>
-                        </div>
-                        
-
                     </div>
-
                     
+
+                
+                    <!-- Hourly stats -->
+                    <!-- Shown only when the day is extended -->
+                    <!-- .extended > .hourly -->
+                    <div class="hourly">
+
+                        <% for (var j = 0; j < days[i].length; j++) { %>
+                            <div class="hour">
+                                <img 
+                                src="<%- `./icons/${(days[i][j].weather[0].icon).slice(0, -1)}d.png` %>" 
+                                alt="<%- days[i][j].weather[0].description %>">
+                                <div class="hourtemp">
+                                    <h1>
+                                        <%- Math.round(days[i][j].main.temp) %>°C
+                                    </h1>
+                                    <p>
+                                        <%- days[i][j].dt_txt.slice(10, 16) %>
+                                    </p>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
 
                 </div>
 
